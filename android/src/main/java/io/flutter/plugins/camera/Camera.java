@@ -531,6 +531,9 @@ public class Camera {
     try {
       final CaptureRequest.Builder captureBuilder =
           cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+      if (pictureImageReader == null) {
+        return;
+      }
       captureBuilder.addTarget(pictureImageReader.getSurface());
 
       captureBuilder.set(CaptureRequest.CONTROL_AF_MODE,
@@ -890,6 +893,9 @@ public class Camera {
   }
 
   public void startPreview() throws CameraAccessException {
+    if (pictureImageReader == null) {
+        return;
+    }
     createCaptureSession(CameraDevice.TEMPLATE_PREVIEW, pictureImageReader.getSurface());
   }
 
